@@ -62,6 +62,7 @@
     <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
     <Compile Include="Assets\Scripts\Managers\LevelManager.cs" />
     <Compile Include="Assets\Scripts\Managers\MenuManager.cs" />
+    <Compile Include="Assets\Scripts\Managers\PoolManager.cs" />
     <Compile Include="Assets\Scripts\States\GameState.cs" />
     <Compile Include="Assets\Scripts\States\StateGameIntro.cs" />
     <Compile Include="Assets\Scripts\States\StateGameLost.cs" />
