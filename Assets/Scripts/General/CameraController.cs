@@ -35,28 +35,24 @@ public class CameraController : MonoBehaviour {
 				if(Input.mousePosition.x < 3)
 				{
 					Vector3 temp = transform.position;
-					//temp.z -= 1;
 					temp.x -= speedTopDown;
 					transform.position = temp;
 				}
 				else if(Input.mousePosition.y < 3)
 				{
 					Vector3 temp = transform.position;
-					//temp.z -= 1;
 					temp.y -= speedTopDown;
 					transform.position = temp;
 				}
 				else if(Input.mousePosition.x > Screen.width - 3)
 				{
 					Vector3 temp = transform.position;
-					//temp.z -= 1;
 					temp.x += speedTopDown;
 					transform.position = temp;
 				}
 				else if(Input.mousePosition.y > Screen.height - 3)
 				{
 					Vector3 temp = transform.position;
-					//temp.z -= 1;
 					temp.y += speedTopDown;
 					transform.position = temp;
 				}
