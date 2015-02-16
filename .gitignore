@@ -19,10 +19,8 @@ sysinfo.txt
 /*.user
 /*.unityproj
 /*.booproj
-#for unity vs
 /Assets/UnityVS/*
 /Assets/UnityVS.meta
-UnityVS.meta
  
 # ============ #
 # OS generated #
@@ -34,5 +32,3 @@ UnityVS.meta
 Icon?
 ehthumbs.db
 [Tt]humbs.db
-
-
