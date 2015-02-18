@@ -5,20 +5,29 @@ public class CameraController : MonoBehaviour {
 	//publics
 	public bool topDownMovmentEnabled = true;
 	//camera Speeds
-	public float speedTopDown = 1f;
-	public float speedShowcase = 1f;
+	public float topDownSpeed = 1f;
+	public float showcaseSpeed = 1f;
+	public float transitionSpeed = 1f;
 
 	public CameraStates DefaultMode = CameraStates.TopDown;
 
-	public enum CameraStates{TopDown, Showcase, Transition, FirstPerson};
+	public enum CameraStates{TopDown, Showcase, Transition, FirstPerson, FreeLook};
 	//for transitions
+	private Vector3 startPos;
 	private Vector3 targetPos;
+	private float startTime;
+	private float journeyLength;
+
 	private Vector3 targetDir;
+
 	//first person target, showcase target...
 	private Transform targetFP;
 	private Transform targetSC;
 
 	private CameraStates cState;
+	private CameraStates pState;
+
+
 
 	// Use this for initialization
 	void Start () {
@@ -35,46 +44,80 @@ public class CameraController : MonoBehaviour {
 				if(Input.mousePosition.x < 3)
 				{
 					Vector3 temp = transform.position;
-					//temp.z -= 1;
-					temp.x -= speedTopDown;
+					temp.x -= topDownSpeed;
 					transform.position = temp;
 				}
 				else if(Input.mousePosition.y < 3)
 				{
 					Vector3 temp = transform.position;
 					//temp.z -= 1;
-					temp.y -= speedTopDown;
+					temp.y -= topDownSpeed;
 					transform.position = temp;
 				}
 				else if(Input.mousePosition.x > Screen.width - 3)
 				{
 					Vector3 temp = transform.position;
-					//temp.z -= 1;
-					temp.x += speedTopDown;
+					temp.x += topDownSpeed;
 					transform.position = temp;
 				}
 				else if(Input.mousePosition.y > Screen.height - 3)
 				{
 					Vector3 temp = transform.position;
-					//temp.z -= 1;
-					temp.y += speedTopDown;
+					temp.y += topDownSpeed;
 					transform.position = temp;
 				}
 
-				if(Input.GetAxis("Mouse ScrollWheel") > 0.1)
+				if(Input.GetAxis("Mouse ScrollWheel") > 0.01)
 				{
 					Vector3 temp = transform.position;
-					temp.z += speedTopDown;
+					temp.z += topDownSpeed;
 					transform.position = temp;
 				}
-				else if(Input.GetAxis("Mouse ScrollWheel") < -0.1)
+				else if(Input.GetAxis("Mouse ScrollWheel") < -0.01)
 				{
 					Vector3 temp = transform.position;
-					temp.z -= speedTopDown;
+					temp.z -= topDownSpeed;
 					transform.position = temp;
+				}
+			}
+			break;
+		case CameraStates.Transition:
+			{
+				float distCovered = (Time.time - startTime) * transitionSpeed;
+				float fracJourney = distCovered / journeyLength;
+				transform.position = Vector3.Lerp(startPos, targetPos, fracJourney);
+
+				//needs to be not exact
+				if(distCovered == journeyLength)
+				{
+					cState = pState;
 				}
 			}
 			break;
 		}
 	}
+	
+	public bool InitTrasition(Vector3 tPos, Vector3 tDir)
+	{
+		if(cState != CameraStates.Transition)
+		{
+			startPos = transform.position;
+			targetPos = tPos;
+
+			pState = cState;
+			cState = CameraStates.Transition;
+
+			startTime = Time.time;
+			journeyLength = Vector3.Distance(startPos, targetPos);
+			return true;
+		}
+		return false;
+	}
+
+	public bool ChangeState()
+	{
+		return true;
+	}
 }
+
+
