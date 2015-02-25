@@ -2,6 +2,12 @@
 using System.Collections;
 
 public class CameraController : MonoBehaviour {
+
+    public Transform transitionCube1;
+    public Transform transitionCube2;
+    
+
+
 	//publics
 	public bool topDownMovmentEnabled = true;
 	//camera Speeds
@@ -113,6 +119,19 @@ public class CameraController : MonoBehaviour {
 		}
 		return false;
 	}
+
+    public void TestTransition(int cube)
+    {
+        switch(cube)
+        {
+            case 1:
+                InitTrasition(new Vector3(transitionCube1.position.x, transitionCube1.position.y, Camera.main.transform.position.z), Vector3.zero);
+            break;
+            case 2:
+                InitTrasition(new Vector3(transitionCube2.position.x, transitionCube2.position.y, Camera.main.transform.position.z), Vector3.zero);
+            break;
+        }
+    }
 
 	public bool ChangeState()
 	{
