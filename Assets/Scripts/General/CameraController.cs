@@ -41,7 +41,7 @@ public class CameraController : MonoBehaviour {
 
 
     //CONSTS
-    static private float EPSILON = 1.0f;
+    static public float EPSILON = 1.0f;
 
 
 	// Use this for initialization
@@ -106,11 +106,11 @@ public class CameraController : MonoBehaviour {
                 //it shoudl be calculated based on the max/min/cur speed and the journey length and the acceleration will deff need to be used
                 //idealy the camera will never be stuck at the min speed
 
-                if (totalDistCovered < (journeyLength * 0.4))
+                if (totalDistCovered < (journeyLength * 0.4))//this one is fine
                 {
                     tSpeed += (tSpeed * transitionAcceleration);
                 }
-                else if (totalDistCovered > (journeyLength * 0.6))
+                else if (totalDistCovered > (journeyLength * 0.8))//this needs to be changed
                 {
                     tSpeed -= (tSpeed * transitionAcceleration);
                 }
