@@ -2,10 +2,6 @@
 using System.Collections;
 
 public class CameraController : MonoBehaviour {
-    //debug stuff-------------
-    public Transform transitionCube1;
-    public Transform transitionCube2;
-
     //-----------------------
     
 	//publics
@@ -19,6 +15,8 @@ public class CameraController : MonoBehaviour {
 
 
 	public CameraStates DefaultMode = CameraStates.TopDown;
+
+    public Bounds cameraBounds;
 
 	public enum CameraStates{TopDown, Showcase, Transition, FirstPerson, FreeLook};
 	//for transitions
@@ -51,7 +49,7 @@ public class CameraController : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void LateUpdate () {
 		switch(cState)
 		{
 		case CameraStates.TopDown:
@@ -62,24 +60,44 @@ public class CameraController : MonoBehaviour {
 					Vector3 temp = transform.position;
 					temp.x -= topDownSpeed;
 					transform.position = temp;
+                    if(!cameraBounds.Contains(transform.position))//better way of doing this?
+                    {
+                        temp.x += topDownSpeed;
+                        transform.position = temp;
+                    }
 				}
 				if(Input.mousePosition.y < 3)
 				{
 					Vector3 temp = transform.position;
 					temp.z -= topDownSpeed;
 					transform.position = temp;
+                    if (!cameraBounds.Contains(transform.position))//better way of doing this?
+                    {
+                        temp.z += topDownSpeed;
+                        transform.position = temp;
+                    }
 				}
 				if(Input.mousePosition.x > Screen.width - 3)
 				{
 					Vector3 temp = transform.position;
 					temp.x += topDownSpeed;
 					transform.position = temp;
+                    if (!cameraBounds.Contains(transform.position))//better way of doing this?
+                    {
+                        temp.x -= topDownSpeed;
+                        transform.position = temp;
+                    }
 				}
 				if(Input.mousePosition.y > Screen.height - 3)
 				{
 					Vector3 temp = transform.position;
 					temp.z += topDownSpeed;
 					transform.position = temp;
+                    if (!cameraBounds.Contains(transform.position))//better way of doing this?
+                    {
+                        temp.z -= topDownSpeed;
+                        transform.position = temp;
+                    }
 				}
 
 				if(Input.GetAxis("Mouse ScrollWheel") > 0.01)
@@ -87,12 +105,22 @@ public class CameraController : MonoBehaviour {
 					Vector3 temp = transform.position;
 					temp.y -= topDownSpeed;
 					transform.position = temp;
+                    if (!cameraBounds.Contains(transform.position))//better way of doing this?
+                    {
+                        temp.y += topDownSpeed;
+                        transform.position = temp;
+                    }
 				}
 				if(Input.GetAxis("Mouse ScrollWheel") < -0.01)
 				{
 					Vector3 temp = transform.position;
 					temp.y += topDownSpeed;
 					transform.position = temp;
+                    if (!cameraBounds.Contains(transform.position))//better way of doing this?
+                    {
+                        temp.y -= topDownSpeed;
+                        transform.position = temp;
+                    }
 				}
 			}
 			break;
@@ -169,19 +197,6 @@ public class CameraController : MonoBehaviour {
     public bool InitTrasition(Vector3 tPos)
     {
         return InitTrasition(tPos, Vector3.zero);
-    }
-
-    public void TestTransition(int cube)
-    {
-        switch(cube)
-        {
-            case 1:
-                InitTrasition(new Vector3(transitionCube1.position.x, transform.position.y, transitionCube1.position.z));
-                break;
-            case 2:
-                InitTrasition(new Vector3(transitionCube2.position.x, transform.position.y, transitionCube2.position.z));
-                break;
-        }
     }
 
 	public bool ChangeState()
