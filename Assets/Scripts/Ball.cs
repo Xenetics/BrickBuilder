@@ -17,10 +17,4 @@ public class Ball : MonoBehaviour {
         body.velocity = body.velocity.normalized * Speed;
 	}
 
-    public float GetDamage()
-    {
-        return damage;
-    }
-
-
 }
