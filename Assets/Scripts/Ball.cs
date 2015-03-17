@@ -4,7 +4,7 @@ using System.Collections;
 public class Ball : MonoBehaviour {
     public float Speed = 10.0f;
     private Rigidbody body;
-
+    public float damage = 20;
 	// Use this for initialization
 	void Start () {
         body = GetComponent<Rigidbody>();
@@ -16,6 +16,11 @@ public class Ball : MonoBehaviour {
     {
         body.velocity = body.velocity.normalized * Speed;
 	}
+
+    public float GetDamage()
+    {
+        return damage;
+    }
 
 
 }
