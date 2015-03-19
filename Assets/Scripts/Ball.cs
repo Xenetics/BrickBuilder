@@ -21,7 +21,14 @@ public class Ball : MonoBehaviour {
         {
             Debug.Log("Corrected direction");
             Vector3 temp = body.velocity;
-            temp.z -= correctionAmount;
+            if( temp.z > 0)
+            {
+                temp.z += correctionAmount;
+            }
+            else
+            {
+                temp.z -= correctionAmount;
+            }           
             body.velocity = temp;
         }
 	}
