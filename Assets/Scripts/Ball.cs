@@ -17,7 +17,8 @@ public class Ball : MonoBehaviour {
 	void FixedUpdate () 
     {
         body.velocity = body.velocity.normalized * Speed;
-        if (body.velocity.z < correctionThreshold)
+        //this correction stuff is not right
+        if (Mathf.Abs(body.velocity.z) < correctionThreshold)
         {
             Debug.Log("Corrected direction");
             Vector3 temp = body.velocity;
