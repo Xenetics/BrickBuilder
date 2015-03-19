@@ -22,7 +22,7 @@ public class Block : MonoBehaviour {
         {
             Debug.Log(collision.gameObject.GetComponent<Ball>().damage + " Damage BB");
             currHealth -= collision.gameObject.GetComponent<Ball>().damage;
-            if(currHealth < 0)
+            if(currHealth <= 0)
             {
                 Debug.Log("Boom!");
                 Destroy(this.gameObject);
