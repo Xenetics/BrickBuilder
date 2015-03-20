@@ -34,7 +34,7 @@ public class WorkerScript : MonoBehaviour {
 
 			//Debug.Log(Vector3.Distance (this.transform.position, homeBase.transform.position));
 			//Debug.Log (workTimer);
-			if ((Vector3.Distance (this.transform.position, homeBase.transform.position) < 0.9) && workTimer != 0)
+			if ((Vector3.Distance (this.transform.position, homeBase.transform.position) < 2) && workTimer != 0)
 			{
 				workTimer = 0.0f;
 				pathScript.targetPosition = work.transform.position;
@@ -42,7 +42,7 @@ public class WorkerScript : MonoBehaviour {
 			}
 			//Debug.Log (workTimer);
 
-			if ((Vector3.Distance (this.transform.position, work.transform.position) < 0.5) && workTimer == 0)
+			if ((Vector3.Distance (this.transform.position, work.transform.position) < 0.7) && workTimer == 0)
 			{
 				pathScript.stopPath();
 				working = true;
