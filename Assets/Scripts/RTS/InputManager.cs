@@ -68,10 +68,10 @@ public class InputManager : MonoBehaviour {
 			if(selection.width < 25 || selection.height < 25)
 			{
 				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-				
+
 				if(Physics.Raycast(ray, out hit, 1000))
 				{
-					if(hit.transform.gameObject.tag == "Unit")
+					if(hit.transform.gameObject.tag == "Unit" || hit.transform.gameObject.layer == LayerMask.NameToLayer("Buildings"))
 					{
 						selectedUnits.Add(hit.transform.gameObject);
 						hit.transform.gameObject.GetComponent<Selector>().Select();
