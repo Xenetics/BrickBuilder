@@ -46,6 +46,7 @@ public class CameraController : MonoBehaviour {
 	void Start () {
         cState = DefaultMode;
         tSpeed = transitionMinSpeed;
+        GetComponent<Transform>().rotation = Quaternion.Euler(new Vector3(60, -45, 0));
 	}
 	
 	// Update is called once per frame
@@ -58,7 +59,7 @@ public class CameraController : MonoBehaviour {
 				if(Input.mousePosition.x < 3)
 				{
 					Vector3 temp = transform.position;
-                    temp.z += topDownSpeed * 0.5f;
+                    temp.z -= topDownSpeed * 0.5f;
                     temp.x -= topDownSpeed * 0.5f;
 					transform.position = temp;
                     if(!cameraBounds.Contains(transform.position))//better way of doing this?
@@ -71,7 +72,7 @@ public class CameraController : MonoBehaviour {
 				{
 					Vector3 temp = transform.position;
                     temp.z -= topDownSpeed * 0.5f;
-                    temp.x -= topDownSpeed * 0.5f;
+                    temp.x += topDownSpeed * 0.5f;
 					transform.position = temp;
                     if (!cameraBounds.Contains(transform.position))//better way of doing this?
                     {
@@ -82,7 +83,7 @@ public class CameraController : MonoBehaviour {
 				if(Input.mousePosition.x > Screen.width - 3)
 				{
 					Vector3 temp = transform.position;
-                    temp.z -= topDownSpeed * 0.5f;
+                    temp.z += topDownSpeed * 0.5f;
                     temp.x += topDownSpeed * 0.5f;
 					transform.position = temp;
                     if (!cameraBounds.Contains(transform.position))//better way of doing this?
@@ -95,7 +96,7 @@ public class CameraController : MonoBehaviour {
 				{
 					Vector3 temp = transform.position;
 					temp.z += topDownSpeed * 0.5f;
-                    temp.x += topDownSpeed * 0.5f;
+                    temp.x -= topDownSpeed * 0.5f;
 					transform.position = temp;
                     if (!cameraBounds.Contains(transform.position))//better way of doing this?
                     {
