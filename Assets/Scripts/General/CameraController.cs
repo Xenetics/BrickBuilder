@@ -58,7 +58,8 @@ public class CameraController : MonoBehaviour {
 				if(Input.mousePosition.x < 3)
 				{
 					Vector3 temp = transform.position;
-					temp.x -= topDownSpeed;
+                    temp.z += topDownSpeed * 0.5f;
+                    temp.x -= topDownSpeed * 0.5f;
 					transform.position = temp;
                     if(!cameraBounds.Contains(transform.position))//better way of doing this?
                     {
@@ -69,7 +70,8 @@ public class CameraController : MonoBehaviour {
 				if(Input.mousePosition.y < 3)
 				{
 					Vector3 temp = transform.position;
-					temp.z -= topDownSpeed;
+                    temp.z -= topDownSpeed * 0.5f;
+                    temp.x -= topDownSpeed * 0.5f;
 					transform.position = temp;
                     if (!cameraBounds.Contains(transform.position))//better way of doing this?
                     {
@@ -80,7 +82,8 @@ public class CameraController : MonoBehaviour {
 				if(Input.mousePosition.x > Screen.width - 3)
 				{
 					Vector3 temp = transform.position;
-					temp.x += topDownSpeed;
+                    temp.z -= topDownSpeed * 0.5f;
+                    temp.x += topDownSpeed * 0.5f;
 					transform.position = temp;
                     if (!cameraBounds.Contains(transform.position))//better way of doing this?
                     {
@@ -88,10 +91,11 @@ public class CameraController : MonoBehaviour {
                         transform.position = temp;
                     }
 				}
-				if(Input.mousePosition.y > Screen.height - 3)
+				if(Input.mousePosition.y > Screen.height - 3)//up
 				{
 					Vector3 temp = transform.position;
-					temp.z += topDownSpeed;
+					temp.z += topDownSpeed * 0.5f;
+                    temp.x += topDownSpeed * 0.5f;
 					transform.position = temp;
                     if (!cameraBounds.Contains(transform.position))//better way of doing this?
                     {
